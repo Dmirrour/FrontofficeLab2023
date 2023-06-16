@@ -15,8 +15,7 @@ import uy.edu.fing.tse.CargaUY.dto.VehiculoDTO;
 import uy.edu.fing.tse.CargaUY.entity.ITV;
 import uy.edu.fing.tse.CargaUY.model.Vehiculos;
 import uy.edu.fing.tse.CargaUY.response.RestResponse;
-import uy.edu.fing.tse.CargaUY.service.IITVService;
-import uy.edu.fing.tse.CargaUY.service.IVehiculosService;
+
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -26,11 +25,6 @@ import java.util.Date;
 @Named("itvsBean")
 @ViewScoped
 public class ITVsBean implements Serializable {
-
-    @EJB
-    IITVService serviceITV;
-    @EJB
-    IVehiculosService service;
 
     private String matriculaVehiculo;
     private int idITV;
@@ -52,8 +46,18 @@ public class ITVsBean implements Serializable {
                     .idITV(idITV)
                     .fechaValidez(fechaV)
                     .build();
+            Client client = ClientBuilder.newClient();
+            WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/itvs/agregar")
+                    .queryParam("matriculaVehiculo", matriculaVehiculo);
+            Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(nuevoITV, MediaType.APPLICATION_JSON));
 
-            serviceITV.agregarITV(nuevoITV, matriculaVehiculo);
+            RestResponse result = response.readEntity(RestResponse.class);
+            if(result.getStatus() == 201)
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, result.getMsg(), ""));
+            else
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, result.getMsg(), ""));
+
+
 
         }catch (Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error Fecha tranform", ""));
@@ -61,8 +65,9 @@ public class ITVsBean implements Serializable {
     }
 
     public void listaVehiculos(){
-        vehiculos = service.obtenerVehiculos(); ;
-
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/vehiculos/listar");
+        vehiculos = target.request(MediaType.APPLICATION_JSON).get(Vehiculos.class);
         listaVehiculos = vehiculos.getListaVehiculos();
     }
 

@@ -11,6 +11,7 @@
    <title>CargaUY</title>
    #{guiabean.initC()}
    #{guiabean.initiG()}
+   #{guiabean.initD()}
 </h:head>
 <h:body>
    <ui:include src="resources/templates/navbar.xhtml"></ui:include>
@@ -25,13 +26,17 @@
                <div class="field grid">
                   <h:outputLabel for="origen" class="col-12 mb-2 md:col-4 md:mb-0">Origen</h:outputLabel>
                   <div class="col-12 md:col-8">
-                     <h:inputText id="origen" value="#{guiabean.origen}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La razon social es requerida"/>
+                     <p:selectOneMenu id="origen" value="#{guiabean.origen}" filter="true" filterMatchMode="contains">
+                        <f:selectItems value="#{guiabean.departamentos}" var="rub" itemLabel="#{rub}" itemValue="#{rub}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El Rubro es requerida"/>
+                     </p:selectOneMenu>
                   </div>
                </div>
                <div class="field grid">
                   <h:outputLabel for="destino" class="col-12 mb-2 md:col-4 md:mb-0">Destino</h:outputLabel>
                   <div class="col-12 md:col-8">
-                     <h:inputText id="destino" value="#{guiabean.destino}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El nombre publico es requerido"/>
+                     <p:selectOneMenu id="destino" value="#{guiabean.destino}" filter="true" filterMatchMode="contains">
+                        <f:selectItems value="#{guiabean.departamentos}" var="rub" itemLabel="#{rub}" itemValue="#{rub}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El Rubro es requerida"/>
+                     </p:selectOneMenu>
                   </div>
                </div>
                <div class="field grid">

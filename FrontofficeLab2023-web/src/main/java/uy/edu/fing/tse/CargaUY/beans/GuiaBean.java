@@ -11,6 +11,7 @@ import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import uy.edu.fing.tse.CargaUY.dto.GuiaDTO;
 import uy.edu.fing.tse.CargaUY.dto.RubroDTO;
@@ -19,11 +20,13 @@ import uy.edu.fing.tse.CargaUY.dto.ViajeDTO;
 import uy.edu.fing.tse.CargaUY.model.Guias;
 import uy.edu.fing.tse.CargaUY.model.Rubros;
 import uy.edu.fing.tse.CargaUY.model.TipodeCargas;
+import uy.edu.fing.tse.CargaUY.response.RestResponse;
 
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 @Named("guiabean")
@@ -50,12 +53,33 @@ public class GuiaBean implements Serializable {
     private GuiaDTO guia;
     private Long guiaSeleccionado;
 
-
-
+    private ArrayList<String> departamentos;
 
     public GuiaBean(){}
 
-
+    public void initD(){
+        departamentos = new ArrayList<>(Arrays.asList(
+                "Artigas",
+                "Canelones",
+                "Cerro Largo",
+                "Colonia",
+                "Durazno",
+                "Flores",
+                "Florida",
+                "Lavalleja",
+                "Maldonado",
+                "Montevideo",
+                "Paysandú",
+                "Río Negro",
+                "Rivera",
+                "Rocha",
+                "Salto",
+                "San José",
+                "Soriano",
+                "Tacuarembó",
+                "Treinta y Tres"
+        ));
+    }
     public void initC(){
         Client client1 = ClientBuilder.newClient();
         //WebTarget target = client.target("https://cargauy.web.elasticloud.uy/LaboratorioCargaUYgrupo12-web/rest/rubros/listarG");//direccion de la pagina web
@@ -71,8 +95,6 @@ public class GuiaBean implements Serializable {
     }
 
     public void initiG(){ //falta hacerlo rest
-       /* guias= guiaService.obtenerGuia();
-        guiasDTOS=guias.getListaGuia();*/
         Client client1 = ClientBuilder.newClient();
         //WebTarget target = client.target("https://cargauy.web.elasticloud.uy/LaboratorioCargaUYgrupo12-web/rest/guia/listarG");//direccion de la pagina web
         WebTarget target = client1.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/guia/listarG");
@@ -128,23 +150,59 @@ public class GuiaBean implements Serializable {
         }
     }
 
-    public void asignarViaje(SelectEvent<ViajeDTO> event){
-        viajeSeleccionado = event.getObject();
-        guiaService.asignarEmpresa(idGuia, viajeSeleccionado.getId());
-    }
-
     public void leer(GuiaDTO guia2){
         System.out.println("Entre al leer");
         guia = guia2;
     }
 
-    public void modificar(){
+    public void modificar(RowEditEvent event){
         /*guiaService.modificar(guia);*/
-        Client client = ClientBuilder.newClient();
-        //WebTarget target = client.target("https://cargauy.web.elasticloud.uy/LaboratorioCargaUYgrupo12-web/rest/guia/modificarG");//direccion de la pagina web
-        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/guia/modificarG");
-        target.request().post(Entity.entity(guia, MediaType.APPLICATION_JSON));
+        GuiaDTO g=(GuiaDTO) event.getObject();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fechai = null;
+        Date fechaf = null;
+        if(origen.isEmpty()&&origen=="")
+            origen=g.getOrigen();
+        if(destino.isEmpty()&&destino=="")
+            destino=g.getDestino();
+        if(volumendeCarga==0.0)
+            volumendeCarga=g.getVolumen_carga();
+        if (fechaI == null || fechaI.isEmpty())
+            fechaI=g.getFechaInicio().toString();
+        if (fechaF == null || fechaF.isEmpty())//se puede agregar if c
+            fechaF=g.getFechaFin().toString();
+        try{
+            fechai = formatter.parse(fechaI);
+            fechaf = formatter.parse(fechaF);
+            GuiaDTO nuevaGuia = GuiaDTO.builder()
+                    .idGuia(g.getIdGuia())
+                    .origen(origen)
+                    .destino(destino)
+                    .fechaInicio(fechai)
+                    .fechaFin(fechaf)
+                    .volumen_carga(volumendeCarga)
+                    .build();
+
+            Client client = ClientBuilder.newClient();
+            //WebTarget target = client.target("https://cargauy.web.elasticloud.uy/LaboratorioCargaUYgrupo12-web/rest/guia/modificarG");//direccion de la pagina web
+            WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/guia/modificarG");
+            target.request(MediaType.APPLICATION_JSON).post(Entity.entity(nuevaGuia, MediaType.APPLICATION_JSON));
+            fechaI=null;
+            fechaf=null;
+            volumendeCarga=(float) 0.0;
+            destino="";
+            origen="";
+        }catch (Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error Fecha pasado", ""));
+        }
+
     }
+
+    public void cancelar(RowEditEvent event) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cancelado", ""));
+    }
+
     public GuiaDTO getGuia() {
         return guia;
     }
@@ -257,5 +315,13 @@ public class GuiaBean implements Serializable {
 
     public void setGuiaSeleccionado(Long guiaSeleccionado) {
         this.guiaSeleccionado = guiaSeleccionado;
+    }
+
+    public ArrayList<String> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(ArrayList<String> departamentos) {
+        this.departamentos = departamentos;
     }
 }

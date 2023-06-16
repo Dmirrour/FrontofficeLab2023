@@ -18,11 +18,9 @@ import uy.edu.fing.tse.CargaUY.entity.ITV;
 import uy.edu.fing.tse.CargaUY.entity.PNC;
 import uy.edu.fing.tse.CargaUY.entity.Vehiculo;
 import uy.edu.fing.tse.CargaUY.model.Empresas;
-import uy.edu.fing.tse.CargaUY.model.Rubros;
 import uy.edu.fing.tse.CargaUY.model.Vehiculos;
 import uy.edu.fing.tse.CargaUY.response.RestResponse;
-import uy.edu.fing.tse.CargaUY.service.IVehiculosService;
-import uy.edu.fing.tse.CargaUY.service.IEmpresasService;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,13 +28,6 @@ import java.util.ArrayList;
 @Named("vehiculosBean")
 @ViewScoped
 public class VehiculosBean implements Serializable {
-
-    @EJB
-    IVehiculosService service;
-
-    @EJB
-    IEmpresasService serviceEmpresa;
-
 
     private Vehiculos vehiculos;
     private ArrayList<VehiculoDTO> list;
@@ -57,13 +48,17 @@ public class VehiculosBean implements Serializable {
 
     public VehiculosBean(){}
 
-    public void listaEmpresas(){
+    /*public void listaEmpresas(){
 
         listaEmpresas = serviceEmpresa.obtenerEmpresas().getListaEmpresas();
-    }
+    }*/
 
     public void initLista(){
-        list = service.obtenerVehiculos().getListaVehiculos();
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/empresas/listar");
+        empresas = target.request(MediaType.APPLICATION_JSON).get(Empresas.class);
+        listaEmpresas = empresas.getListaEmpresas();
+
     }
 
     public void addVehiculo(){
@@ -75,16 +70,27 @@ public class VehiculosBean implements Serializable {
                 .capacidadCarga(capacidadCarga)
                 .build();
 
-        service.agregarVehiculo(nuevoVehiculo, nroEmpresa);
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/vehiculos/agregar")
+                .queryParam("nroEmpresa", nroEmpresa);
+        Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(nuevoVehiculo, MediaType.APPLICATION_JSON));
+
+        RestResponse result = response.readEntity(RestResponse.class);
+        if(result.getStatus() == 201)
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, result.getMsg(), ""));
+        else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, result.getMsg(), ""));
     }
 
-    public void filtrarVehiculos(){
+    /*public void filtrarVehiculos(){
         list = service.filtrarVehiculos(filtro).getListaVehiculos();
-    }
+    }*/
 
     public void eliminarVehiculo(String matricula){
-
-        if(service.borrarVehiculo(matricula)){
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/vehiculos/eliminar/".concat(String.valueOf(matricula)));
+        boolean exito = target.request().delete(Boolean.class);
+        if(exito){
             initLista();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Se ha borrado el Vehiculo", ""));
         }else {
@@ -101,24 +107,11 @@ public class VehiculosBean implements Serializable {
                 .capacidadCarga(capacidadCarga)
                 .build();
 
-        service.modificarVehiculo(vehiculoModificado);
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/vehiculos/modificar");
+        target.request(MediaType.APPLICATION_JSON).post(Entity.entity(vehiculoModificado, MediaType.APPLICATION_JSON));
     }
 
-    public IVehiculosService getService() {
-        return service;
-    }
-
-    public void setService(IVehiculosService service) {
-        this.service = service;
-    }
-
-    public IEmpresasService getServiceEmpresa() {
-        return serviceEmpresa;
-    }
-
-    public void setServiceEmpresa(IEmpresasService serviceEmpresa) {
-        this.serviceEmpresa = serviceEmpresa;
-    }
 
     public Vehiculos getVehiculos() {
         return vehiculos;

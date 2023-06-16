@@ -8,95 +8,100 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+
     <title>CargaUY</title>
     #{guiabean.initC()}
     #{guiabean.initiG()}
+    #{guiabean.initD()}
 </h:head>
 <h:body>
-
+    <ui:include src="resources/templates/navbar.xhtml"></ui:include>
     <f:view>
     <p:card styleClass="flex justify-content-center">
         <h2 class="text-center">Gestion de Guias</h2>
-        <h:form prependId="false">
+        <h:form id="fore" prependId="false">
+            <p:growl id="msg"/>
             <p:dataTable id="table"
                          var="tdp"
-                         value="#{guiabean.guiasDTOS}"  >
+                         value="#{guiabean.guiasDTOS}"
+                         editable="true">
+                <p:ajax event="rowEdit" listener="#{guiabean.modificar}" update=":fore:msg :fore:table" oncomplete="handleComplete(xhr, status, args)"/>
+                <p:ajax event="rowEditCancel" listener="#{guiabean.cancelar}" update=":fore:msg :fore:table" oncomplete="handleComplete(xhr, status, args)"/>
+
                 <p:column headerText="Nro" sortBy="#{tdp.idGuia}" filterBy="#{tdp.idGuia}" filterMatchMode="contains" >
                     <h:outputText value="#{tdp.idGuia}" />
                 </p:column>
+
                 <p:column headerText="Origen" sortBy="#{tdp.origen}">
-                    <h:outputText value="#{tdp.origen}" />
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{tdp.origen}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu  value="#{guiabean.origen}" filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="Elegir uno..." itemValue="" disabled="true" />
+                                <f:selectItems value="#{guiabean.departamentos}" var="rub" itemLabel="#{rub}" itemValue="#{rub}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El Rubro es requerida"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Destino" sortBy="#{tdp.destino}">
-                    <h:outputText value="#{tdp.destino}" />
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{tdp.destino}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu  value="#{guiabean.destino}" filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="Elegir uno..." itemValue="" disabled="true" />
+                                <f:selectItems value="#{guiabean.departamentos}" var="rub" itemLabel="#{rub}" itemValue="#{rub}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El Rubro es requerida"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Fecha inicio" sortBy="#{tdp.fechaInicio}">
-                    <h:outputText value="#{tdp.fechaInicio}" />
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{tdp.fechaInicio}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText type="date" value="#{guiabean.fechaI}" required="true" requiredMessage="La direccion es requerida"/>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Fecha fin" sortBy="#{tdp.fechaFin}">
-                    <h:outputText value="#{tdp.fechaFin}"/>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{tdp.fechaFin}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText type="date" value="#{guiabean.fechaF}" required="true" requiredMessage="La direccion es requerida"/>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Volumen Carga (kg)" sortBy="#{tdp.volumen_carga}">
-                    <h:outputText value="#{tdp.volumen_carga}"/>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{tdp.volumen_carga}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{guiabean.tipodeCarga}"/>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
+
+                <p:column>
+                    <p:rowEditor styleClass="rounded-button ui-button-danger" icon="pi pi-pencil"/>
+                </p:column>
+
                 <p:column headerText="Rubro" sortBy="#{tdp.rubro.nombre}">
                     <h:outputText value="#{tdp.rubro.nombre}"/>
                 </p:column>
-                <p:column headerText="Viaje" sortBy="#{tdp.tipoCarga.nombre}">
+                <p:column headerText="Tipo" sortBy="#{tdp.tipoCarga.nombre}">
                     <h:outputText value="#{tdp.tipoCarga.nombre}"/>
                 </p:column>
                 <p:column headerText="Viaje" sortBy="#{tdp.viaje.nombre}">
                     <h:outputText value="#{tdp.viaje.nombre}"/>
                 </p:column>
-
-                <p:column exportable="false">
-                <p:commandButton
-                        id="asignaCiudadano"
-                        styleClass="button ui-button-success"
-                        icon="pi pi-pencil"
-                        process="@this"
-                        action="#{guiabean.leer(tdp)}"
-                        oncomplete="PF('listaCiudadanos').show();"
-                        update="dialogo"
-                />
-                <p:dialog id="dialogo" header="Ciudadanos" widgetVar="listaCiudadanos" modal="true" resizable="false">
-                    <div class="field grid">
-                        <h:outputLabel for="origen" class="col-12 mb-2 md:col-4 md:mb-0">Origen</h:outputLabel>
-                        <div class="col-12 md:col-8">
-                            <p:inputMask id="origen" value="#{guiabean.guia.origen}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La razon social es requerida"/>
-                        </div>
-                    </div>
-                    <div class="field grid">
-                        <h:outputLabel for="destino" class="col-12 mb-2 md:col-4 md:mb-0">Destino</h:outputLabel>
-                        <div class="col-12 md:col-8">
-                            <p:inputMask id="destino" value="#{guiabean.guia.destino}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El nombre publico es requerido"/>
-                        </div>
-                    </div>
-                    <div class="field grid">
-                        <h:outputLabel for="fechaI" class="col-12 mb-2 md:col-4 md:mb-0">Fecha de Inicio</h:outputLabel>
-                        <div class="col-12 md:col-8">
-                            <p:calendar id="fechaI" value="#{guiabean.guia.fechaInicio}" pattern="dd/MM/yyyy"
-                                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                        required="true" requiredMessage="La fecha de inicio es requerida"/>                        </div>
-                    </div>
-                    <div class="field grid">
-                        <h:outputLabel for="fechaF" class="col-12 mb-2 md:col-4 md:mb-0">Fecha de Fin</h:outputLabel>
-                        <div class="col-12 md:col-8">
-                            <p:calendar id="fechaF" value="#{guiabean.guia.fechaFin}" pattern="dd/MM/yyyy"
-                                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-                                        required="true" requiredMessage="La fecha de inicio es requerida"/>                        </div>
-                    </div>
-                    <div class="field grid">
-                        <h:outputLabel for="volumen" class="col-12 mb-2 md:col-4 md:mb-0">Volumen de Carga</h:outputLabel>
-                        <div class="col-12 md:col-8">
-                            <p:inputMask id="volumen" value="#{guiabean.guia.volumen_carga}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La direccion es requerida"/>
-                        </div>
-                    </div>
-                    <p:commandButton value="Modificar" action="#{guiabean.modificar()}" oncomplete="location.reload()" class="text-white bg-primary-500 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700"/>
-                </p:dialog>
-                </p:column>
-
-
 
 
                 <p:column exportable="false">
@@ -111,6 +116,8 @@
 
     </h:form>
     </p:card>
+        <script src="resources/templates/Swing.js"></script>
+
     </f:view>
 </h:body>
 </html>

@@ -21,7 +21,7 @@ public class UsuarioDTO implements Serializable {
     protected String email;
     protected String pass;
     protected TipoUsuario tipoUsuario;
-    protected Empresa empresa;
+    protected EmpresaDTO empresa;
 
     /*public UsuarioDTO(Usuario u){
         this.id = u.getId();

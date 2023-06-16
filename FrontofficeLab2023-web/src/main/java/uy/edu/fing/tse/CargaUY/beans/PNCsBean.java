@@ -5,18 +5,16 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import uy.edu.fing.tse.CargaUY.dto.VehiculoDTO;
+import uy.edu.fing.tse.CargaUY.entity.PNC;
+import uy.edu.fing.tse.CargaUY.model.Vehiculos;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import uy.edu.fing.tse.CargaUY.dto.VehiculoDTO;
-import uy.edu.fing.tse.CargaUY.entity.PNC;
-import uy.edu.fing.tse.CargaUY.model.Vehiculos;
 import uy.edu.fing.tse.CargaUY.response.RestResponse;
-import uy.edu.fing.tse.CargaUY.service.IPNCService;
-import uy.edu.fing.tse.CargaUY.service.IVehiculosService;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -26,12 +24,6 @@ import java.util.Date;
 @Named("pncsBean")
 @ViewScoped
 public class PNCsBean implements Serializable {
-
-    @EJB
-    IPNCService servicePNC;
-    @EJB
-    IVehiculosService service;
-
     private String matriculaVehiculo;
     private int idPNC;
     private String fechaValidez;
@@ -53,7 +45,17 @@ public class PNCsBean implements Serializable {
                     .fechaValidez(fechaV)
                     .build();
 
-            servicePNC.agregarPNC(nuevoPNC, matriculaVehiculo);
+            Client client = ClientBuilder.newClient();
+            WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/pncs/agregar")
+                    .queryParam("matriculaVehiculo", matriculaVehiculo);
+            Response response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(nuevoPNC, MediaType.APPLICATION_JSON));
+
+            RestResponse result = response.readEntity(RestResponse.class);
+            if(result.getStatus() == 201)
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, result.getMsg(), ""));
+            else
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, result.getMsg(), ""));
+
 
         }catch (Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Error Fecha tranform", ""));
@@ -61,8 +63,9 @@ public class PNCsBean implements Serializable {
     }
 
     public void listaVehiculos(){
-        vehiculos = service.obtenerVehiculos(); ;
-
+        Client client = ClientBuilder.newClient();
+        WebTarget target = client.target("http://localhost:8080/LaboratorioCargaUYgrupo12-web/rest/vehiculos/listar");
+        vehiculos = target.request(MediaType.APPLICATION_JSON).get(Vehiculos.class);
         listaVehiculos = vehiculos.getListaVehiculos();
     }
 

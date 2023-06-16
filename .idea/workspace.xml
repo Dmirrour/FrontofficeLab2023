@@ -1,10 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="FrontofficeLab2023-ear:ear" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1738491-e69d-4bd5-97fe-d88d4b35250c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ear/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/EmpresaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/GuiaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/ITV_DTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/LoginDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/PNC_DTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/RubroDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/TipodeCargaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/UsuarioDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/VehiculoDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/dto/ViajeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Empresa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/EstadoViaje.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Guia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/ITV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/PNC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Rubro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/TipoUsuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/TipodeCarga.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Ubicacion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Vehiculo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/entity/Viaje.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/Empresas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/Guias.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/ITVs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/PNCs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/Rubros.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/TipodeCargas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/Usuarios.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/Vehiculos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/main/java/uy/edu/fing/tse/CargaUY/model/Viajes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-ejb/src/test/resources/arquillian.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/java/uy/edu/fing/tse/CargaUY/beans/GuiaBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/java/uy/edu/fing/tse/CargaUY/beans/ITVsBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/java/uy/edu/fing/tse/CargaUY/beans/PNCsBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/java/uy/edu/fing/tse/CargaUY/beans/VehiculosBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/java/uy/edu/fing/tse/CargaUY/response/RestResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/WEB-INF/beans.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/WEB-INF/faces-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/agregarITV.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/agregarPNC.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/agregarVehiculo.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/altaGuia.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/altaViaje.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/index.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/listarGuia.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/resources/templates/Swing.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/main/webapp/resources/templates/navbar.xhtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/test/java/org/example/test/SampleIT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FrontofficeLab2023-web/src/test/resources/arquillian.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -14,6 +78,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -28,14 +95,113 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Damian Vera/Documents/laboratoriogrupo12/LaboratorioCargaUYgrupo12-ear/target/LaboratorioCargaUYgrupo12.ear&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/Damian Vera/Documents/Geo_lab2023_g14/Geo_lab2023_g14-web/src/main/java/uy/edu/tsig/bean/ServicioEmBean.java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Damian Vera\Documents\FrontofficeLab2023\FrontofficeLab2023-web\src\main\webapp" />
+      <recent name="C:\Users\Damian Vera\Documents\FrontofficeLab2023\FrontofficeLab2023-web\src\main\java\uy\edu\fing\tse\CargaUY\beans" />
+      <recent name="C:\Users\Damian Vera\Documents\FrontofficeLab2023\FrontofficeLab2023-web\src\main\java" />
+      <recent name="C:\Users\Damian Vera\Documents\FrontofficeLab2023\FrontofficeLab2023-ejb\src\main\java" />
+      <recent name="C:\Users\Damian Vera\Documents\FrontofficeLab2023\FrontofficeLab2023-ejb\src\main\java\org\example" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example.beans" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FrontJavaEE" type="JBossConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Geografica" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/FrontofficeLab2023-web/index.xhtml" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="FrontofficeLab2023-ear:ear">
+          <settings />
+        </artifact>
+        <file path="$PROJECT_DIR$/../laboratoriogrupo12/LaboratorioCargaUYgrupo12-ear/target/LaboratorioCargaUYgrupo12.ear">
+          <settings />
+        </file>
+      </deployment>
+      <server-settings>
+        <option name="SERVER" />
+        <option name="BINDING_SET_NAME" value="" />
+        <option name="DOMAIN" value="false" />
+        <option name="SERVER_GROUP" value="main-server-group" />
+        <option name="USERNAME" value="" />
+        <option name="CREDENTIAL_ALIAS" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="JBoss" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60015" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="FrontofficeLab2023-ear:ear" />
+        </option>
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,8 +210,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686631095995</updated>
-      <workItem from="1686631097312" duration="1000" />
+      <workItem from="1686631097312" duration="1622000" />
+      <workItem from="1686632733839" duration="944000" />
+      <workItem from="1686676253523" duration="13884000" />
+      <workItem from="1686696929929" duration="3813000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/FrontofficeLab2023-web/src/main/java/uy/edu/fing/tse/CargaUY/beans/GuiaBean.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
