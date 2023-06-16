@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+   <title>CargaUY</title>
+   #{guiabean.initC()}
+   #{guiabean.initiG()}
+</h:head>
+<h:body>
+   <ui:include src="resources/templates/navbar.xhtml"></ui:include>
+   <f:view>
+      <p:card styleClass="flex justify-content-center">
+         <h2 class="text-center">Alta Guia</h2>
+         <h:form>
+            <p:growl>
+               <p:autoUpdate />
+            </p:growl>
+            <div class="w-fit m-auto mb-4">
+               <div class="field grid">
+                  <h:outputLabel for="origen" class="col-12 mb-2 md:col-4 md:mb-0">Origen</h:outputLabel>
+                  <div class="col-12 md:col-8">
+                     <h:inputText id="origen" value="#{guiabean.origen}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La razon social es requerida"/>
+                  </div>
+               </div>
+               <div class="field grid">
+                  <h:outputLabel for="destino" class="col-12 mb-2 md:col-4 md:mb-0">Destino</h:outputLabel>
+                  <div class="col-12 md:col-8">
+                     <h:inputText id="destino" value="#{guiabean.destino}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El nombre publico es requerido"/>
+                  </div>
+               </div>
+               <div class="field grid">
+                  <h:outputLabel for="fechaI" class="col-12 mb-2 md:col-4 md:mb-0">Fecha de Inicio</h:outputLabel>
+                  <div class="col-12 md:col-8">
+                     <h:inputText type="date" id="fechaI" value="#{guiabean.fechaI}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La direccion es requerida"/>
+                  </div>
+               </div>
+               <div class="field grid">
+                  <h:outputLabel for="fechaF" class="col-12 mb-2 md:col-4 md:mb-0">Fecha de Fin</h:outputLabel>
+                  <div class="col-12 md:col-8">
+                     <h:inputText type="date" id="fechaF" value="#{guiabean.fechaF}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La direccion es requerida"/>
+                  </div>
+               </div>
+               <div class="field grid">
+                  <h:outputLabel for="volumen" class="col-12 mb-2 md:col-4 md:mb-0">Volumen de Carga</h:outputLabel>
+                  <div class="col-12 md:col-8">
+                     <h:inputText id="volumen" value="#{guiabean.tipodeCarga}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="La direccion es requerida"/>
+                  </div>
+               </div>
+               <div class="field grid">
+                     <h:outputLabel for="rubro" class="col-12 mb-2 md:col-4 md:mb-0">Rubros</h:outputLabel>
+                     <div class="col-12 md:col-8">
+                     <p:selectOneMenu id="rubro" value="#{guiabean.idRubro}" filter="true" filterMatchMode="contains">
+                        <f:selectItems value="#{guiabean.rubroDTOS}" var="rub" itemLabel="#{rub.indice},#{rub.nombre}" itemValue="#{rub.nombre}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El Rubro es requerida"/>
+                     </p:selectOneMenu>
+                     </div>
+               </div>
+               <div class="field grid">
+                     <h:outputLabel for="tdp" class="col-12 mb-2 md:col-4 md:mb-0">Tipo de Cargo</h:outputLabel>
+
+                     <p:selectOneMenu id="tdp" value="#{guiabean.idTdP}" filter="true" filterMatchMode="contains"><div class="col-12 md:col-8">
+
+                        <f:selectItems value="#{guiabean.tipodeCargaDTOS}" var="tip" itemLabel="#{tip.indice}, #{tip.nombre}" itemValue="#{tip.nombre}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="El Tipo de Carga es requerida"/>
+                     </div>
+                  </p:selectOneMenu>
+               </div>
+
+               <div class="text-right">
+                  <p:commandButton value="Crear" action="#{guiabean.addGuia()}" oncomplete="location.reload()" class="text-white bg-primary-500 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700"/>
+               </div>
+            </div>
+         </h:form>
+      </p:card>
+   </f:view>
+</h:body>
+</html>

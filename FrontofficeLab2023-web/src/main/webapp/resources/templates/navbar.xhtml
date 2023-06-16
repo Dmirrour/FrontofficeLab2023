@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<script type="application/javascript">
+   function login() {
+      if (true){
+         document.getElementById('loginForm:pass').type = 'text';
+         document.getElementById('loginForm:show').style.display = 'none';
+         document.getElementById('loginForm:hide').style.display = 'inline';
+         document.getElementById('loginForm:show').chequed = 'false';
+         document.getElementById('loginForm:hide').chequed = 'true';
+      } else {
+         document.getElementById('loginForm:pass').type = 'password';
+         document.getElementById('loginForm:show').style.display = 'inline';
+         document.getElementById('loginForm:hide').style.display = 'none';
+         document.getElementById('loginForm:show').chequed = 'true';
+         document.getElementById('loginForm:hide').chequed = 'false';
+      }
+   }
+
+   function changeCursor(obj, cursorStyle) {
+      obj.style.cursor = cursorStyle;
+   }
+
+   function verificarSesion(){
+      if(getSessionMap().get("ci") != null){
+
+      }
+   }
+
+</script>
+
+<body>
+   <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:ui="http://java.sun.com/jsf/facelets"
+                   xmlns:p="http://primefaces.org/ui"
+                  >
+      <p:menubar>
+         <p:menuitem value="Inicio" icon="pi pi-home" url="index.xhtml"/>
+         <p:submenu label="Crear" icon="pi pi-plus">
+            <p:menuitem value="Usuario" icon="pi pi-user" url="agregarUsuario.xhtml"/>
+            <p:menuitem value="Empresa" icon="pi pi-building" url="agregarEmpresa.xhtml"/>
+            <p:menuitem value="Vehiculo" icon="pi pi-car" url="agregarVehiculo.xhtml"/>
+            <p:menuitem value="Guia" icon="pi pi-map" url="altaGuia.xhtml"/>
+            <p:menuitem value="Rubro" icon="pi pi-sitemap" url="altaRubro.xhtml"/>
+            <p:menuitem value="Tipo de carga" icon="pi pi-tag" url="altaTipCarg.xhtml"/>
+            <p:menuitem value="ITV" icon="pi pi-tag" url="agregarITV.xhtml"/>
+            <p:menuitem value="PNC" icon="pi pi-tag" url="agregarPNC.xhtml"/>
+         </p:submenu>
+         <p:submenu label="Gestion" icon="pi pi-book">
+            <p:menuitem value="Empresas" icon="pi pi-building" url="listarEmpresas.xhtml"/>
+            <p:menuitem value="Guias" icon="pi pi-building" url="listarGuia.xhtml"/>
+            <p:menuitem value="Rubros" icon="pi pi-building" url="listarRubros.xhtml"/>
+            <p:menuitem value="Tipo de Carga" icon="pi pi-building" url="listarTDP.xhtml"/>
+         </p:submenu>
+         <p:menuitem value="Autoridades" icon="pi pi-building" url="autoridades.xhtml"/>
+         <p:divider layout="vertical"/>
+         <!--<p:menuitem value="Cerrar Sesion" icon="pi pi-sign-out"/>-->
+         <f:facet name="options">
+            <p:commandButton type="button" value="Perfil" rendered="#{usuariosBean.isLoggedIn()}" icon="pi pi-user" style="margin-right: 10px" styleClass="ui-button-secondary" onclick="window.location.href = 'infoUsuario.xhtml';"/>
+
+            <p:commandButton value="Iniciar sesión" rendered="#{not usuariosBean.isLoggedIn()}" onclick="window.location.href = 'loginUsuario.xhtml';"/>
+            <p:commandButton value="Cerrar sesión" rendered="#{usuariosBean.isLoggedIn()}" action="#{usuariosBean.cerrarSesion()}" />
+            <p:commandButton value="Registrarse" rendered="#{not usuariosBean.isLoggedIn()}" onclick="window.location.href = 'agregarUsuario.xhtml';"/>
+         </f:facet>
+      </p:menubar>
+   </ui:composition>
+</body>
+</html>
